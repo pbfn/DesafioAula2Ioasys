@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DesafioAula2Ioasys</string>
+    <string name="books">Books</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="enviar">Enviar</string>
+    <string name="response_login">Resposta login</string>
 </resources>
