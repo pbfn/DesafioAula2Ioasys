@@ -1,12 +1,8 @@
 package com.example.desafioaula2ioasys.api
 
-import com.example.desafioaula2ioasys.models.BookResponse
-import com.example.desafioaula2ioasys.models.ListBooksResponse
-import com.example.desafioaula2ioasys.models.LoginResponse
+import com.example.desafioaula2ioasys.models.*
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface BooksAPI {
 
@@ -16,11 +12,11 @@ interface BooksAPI {
     @GET("books/{id}")
     suspend fun getBookById():Response<BookResponse>
 
+    @Headers("Content-type: application/json")
     @POST("auth/sign-in")
     suspend fun doLogin(
-        @Query("email") email:String,
-        @Query("password") password:String
-    ):Response<LoginResponse>
+       @Body user: User
+    ):Response<UserResponse>
 
 
 
