@@ -4,16 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_image"
     tools:context=".LoginActivity">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_background"
+        android:background="@drawable/background_image_login"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image_view_logo"
-        android:layout_width="104.4dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="194dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/ic_logo_withe"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,13 +53,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_view_logo">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_text_email"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/background"
+            android:background="#52000000"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:textColor="@color/white" />
@@ -69,13 +78,13 @@
         app:hintTextColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/text_input_email">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_text_password"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/background"
+            android:background="#52000000"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:textColor="@color/white"
@@ -85,16 +94,18 @@
             app:layout_constraintTop_toTopOf="parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_sent"
-        android:layout_width="85dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/heebo_500"
-        android:text="@string/enviar"
+        android:text="@string/entrar"
+        app:cornerRadius="44dp"
         android:textColor="#B22E6F"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/text_input_password"
         app:layout_constraintEnd_toEndOf="@+id/text_input_password"
         app:layout_constraintTop_toTopOf="@+id/text_input_password" />

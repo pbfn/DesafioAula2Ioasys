@@ -1,13 +1,16 @@
 package com.example.desafioaula2ioasys
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.example.desafioaula2ioasys.databinding.ActivityLoginBinding
-import com.example.desafioaula2ioasys.repository.BooksRepository
+import com.example.desafioaula2ioasys.repository.LoginRepository
+import com.example.desafioaula2ioasys.ui.HomeActivity
 import com.example.desafioaula2ioasys.ui.LoginViewModel
-import com.example.desafioaula2ioasys.ui.ViewModelProviderBook
+import com.example.desafioaula2ioasys.ui.ViewModelProviderLogin
 import com.example.desafioaula2ioasys.util.Resource
 
 class LoginActivity : AppCompatActivity() {
@@ -48,17 +51,17 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.editTextEmail
         val password = binding.editTextPassword
         var error = false
-        if (email.text.isEmpty() || email.text.isBlank())
+        if (email.text?.isEmpty() == true  || email.text?.isBlank() == true)
             error = true
 
-        if (password.text.isEmpty() || password.text.isBlank())
+        if (password.text?.isEmpty() == true || password.text?.isBlank() == true)
             error = true
         return error
     }
 
     private fun setupViewModel() {
-        val repository = BooksRepository()
-        val viewModelProvider = ViewModelProviderBook(repository)
+        val repository = LoginRepository()
+        val viewModelProvider = ViewModelProviderLogin(repository)
         viewModel = ViewModelProvider(this, viewModelProvider).get(LoginViewModel::class.java)
     }
 
@@ -66,8 +69,15 @@ class LoginActivity : AppCompatActivity() {
         viewModel.responseLogin.observe(this, { response ->
             when (response) {
                 is Resource.Success -> {
-                    binding.textViewResponse.visibility = View.VISIBLE
-                    binding.textViewResponse.text = "Login ok"
+                    val intent = Intent(this,HomeActivity::class.java)
+                    val sharedPref = getSharedPreferences("tokens", Context.MODE_PRIVATE)
+                    with(sharedPref.edit()){
+                        putString("token",response.data)
+                        commit()
+                    }
+                    intent.putExtra("token",response.data)
+                    startActivity(intent)
+                    finish()
                 }
                 is Resource.Loading -> {
                     binding.textViewResponse.visibility = View.GONE

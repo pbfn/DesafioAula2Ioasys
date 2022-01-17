@@ -3,6 +3,9 @@
     <string name="books">Books</string>
     <string name="email">Email</string>
     <string name="password">Senha</string>
-    <string name="enviar">Enviar</string>
+    <string name="entrar">Entrar</string>
     <string name="response_login">Resposta login</string>
+    <string name="title_book">The Making of a Manager</string>
+    <string name="author">Julie Zhuo</string>
+    <string name="description">150 páginas Editora Loyola Publicado em 2020</string>
 </resources>

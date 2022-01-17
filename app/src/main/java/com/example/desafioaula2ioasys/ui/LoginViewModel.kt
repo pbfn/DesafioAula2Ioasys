@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.desafioaula2ioasys.models.User
-import com.example.desafioaula2ioasys.repository.BooksRepository
+import com.example.desafioaula2ioasys.repository.LoginRepository
 import com.example.desafioaula2ioasys.util.Resource
 import kotlinx.coroutines.launch
 
@@ -14,7 +14,7 @@ import java.lang.Exception
 
 
 class LoginViewModel(
-    val repository: BooksRepository
+    val repository: LoginRepository
 ):ViewModel() {
 
     private var _responseLogin = MutableLiveData<Resource<String>>()
@@ -30,6 +30,7 @@ class LoginViewModel(
         val response = repository.doLogin(user)
         if(response.isSuccessful){
            val token =  response.headers().toMultimap()["authorization"]?.last().toString()
+
             _responseLogin.postValue(Resource.Success(token))
         }else{
             val errorMessage = try {
