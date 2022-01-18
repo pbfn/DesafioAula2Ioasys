@@ -13,32 +13,37 @@ class BookViewModel(
     val repository: BookRepository
 ) : ViewModel() {
 
-    val _listBooks: MutableLiveData<Resource<ListBooksResponse>> = MutableLiveData()
+    val listBooks: MutableLiveData<Resource<ListBooksResponse>> = MutableLiveData()
+    var booksPage: Int = 1
+    var totalPages: Int = 100
+    var listBooksResponse: ListBooksResponse? = null
 
 
-    var lastPage: Boolean = false
-
-//    init {
-//        getListBooks("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MWM5YzI5MGNjNDk4YjVjMDg4NDVlMGEiLCJ2bGQiOjE2NDIxNzA5MDg5NjgsImlhdCI6MTY0MjE3NDUwODk2OH0.1TH4Rqmn41BfawP0nqPbr43CE_zqy6uU1o0z0sKnQbw", 1, 20)
-//    }
-
-    fun getListBooks(token: String, page: Int, amount: Int) = viewModelScope.launch {
-        _listBooks.postValue(Resource.Loading())
-        if (!lastPage) {
-            val response = repository.getBooks(token, page, amount)
-            _listBooks.postValue(handleListBookResponse(response))
+    fun getListBooks(token: String) = viewModelScope.launch {
+        if(booksPage < totalPages){
+            listBooks.postValue(Resource.Loading())
+            val response = repository.getBooks(token, booksPage, 20)
+            listBooks.postValue(handleListBookResponse(response))
         }
     }
 
-    private fun handleListBookResponse(response: Response<ListBooksResponse>): Resource<ListBooksResponse>? {
+    private fun handleListBookResponse(response: Response<ListBooksResponse>): Resource<ListBooksResponse> {
         if (response.isSuccessful) {
-                response.body()?.let { resultResponse->
-                    return Resource.Success(resultResponse)
+            response.body()?.let { resultResponse ->
+                booksPage++
+                totalPages = resultResponse.totalPages
+                if (listBooksResponse == null) {
+                    listBooksResponse = resultResponse
+                } else {
+                    val oldBooks = listBooksResponse?.data
+                    val newBooks = resultResponse.data
+                    oldBooks?.addAll(newBooks)
                 }
-            return null
-        } else {
-            return null
+                return Resource.Success(listBooksResponse ?: resultResponse)
+            }
         }
+        return Resource.Error(response.message())
+
     }
 
 }

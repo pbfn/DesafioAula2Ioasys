@@ -1,6 +1,7 @@
 package com.example.desafioaula2ioasys.ui
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var adapterBook: AdapterBook
     private lateinit var viewModel: BookViewModel
     private lateinit var token: String
+    private lateinit var sharedPref: SharedPreferences
     private var isScrolling = false
     private var isLoading = false
     private var isLastPage = false
@@ -27,6 +29,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
+        sharedPref = getSharedPreferences("tokens", Context.MODE_PRIVATE) ?: return
+        token = sharedPref.getString("token", "null").toString()
         setContentView(binding.root)
         setupViewModel()
         observeData()
@@ -41,11 +45,18 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        viewModel._listBooks.observe(this, { response ->
+        viewModel.listBooks.observe(this, { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgessBar()
-                    adapterBook.differ.submitList(response.data?.data?.toList())
+                    response.data?.let {  booksResponse->
+                        adapterBook.differ.submitList(booksResponse.data.toList())
+                        val totalPages = booksResponse.totalPages
+                        isLastPage = viewModel.booksPage == totalPages
+                        if(isLastPage){
+                            binding.recyclerBooks.setPadding(0,0,0,0)
+                        }
+                    }
                 }
                 is Resource.Loading -> {
                     showProgressBar()
@@ -58,9 +69,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initBooks() {
-        val sharedPref = getSharedPreferences("tokens", Context.MODE_PRIVATE) ?: return
-        token = sharedPref.getString("token", "null").toString()
-        viewModel.getListBooks("Bearer $token", 1, 20)
+        viewModel.getListBooks("Bearer $token")
     }
 
     private fun setupRecyclerView() {
@@ -97,10 +106,10 @@ class HomeActivity : AppCompatActivity() {
             val isTotalMoreThanVisible = totalItemCount >= 20
 
             val shouldPaginate =
-                isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanVisible && !isLoading
+                isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanVisible
 
             if (shouldPaginate) {
-                //viewModel.getListPokemon()
+                viewModel.getListBooks("Bearer $token")
                 isScrolling = false
             }
         }
@@ -116,6 +125,4 @@ class HomeActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.VISIBLE
         isLoading = true
     }
-
-
 }
