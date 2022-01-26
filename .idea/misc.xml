@@ -5,13 +5,18 @@
       <map>
         <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/drawable/background_card.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/drawable/background_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/drawable/bg_gray_with_corner.xml" value="0.75" />
+        <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/drawable/bg_input.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/drawable/custom_progressbar.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/drawable/progress_bar.xml" value="0.3509259259259259" />
         <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/drawable/search_button_inactive.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/layout-v28/activity_login.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/layout/activity_home.xml" value="0.33" />
         <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/layout/activity_login.xml" value="0.38958333333333334" />
         <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
-        <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/layout/book_item_adapter.xml" value="0.67" />
+        <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/layout/book_item_adapter.xml" value="0.5" />
+        <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/layout/botton_sheet_layout.xml" value="0.5" />
+        <entry key="..\:/Users/pbrun/AndroidStudioProjects/DesafioAula2Ioasys/app/src/main/res/layout/custom_search_input.xml" value="0.35052083333333334" />
       </map>
     </option>
   </component>

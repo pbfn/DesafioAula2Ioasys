@@ -18,6 +18,7 @@ class AdapterBook() : RecyclerView.Adapter<AdapterBook.AdpterBooksViewHolder>() 
         val title = itemView.textViewTitle
         val author = itemView.textViewAuthor
         val description = itemView.textViewDescription
+        val card = itemView.cardBook
     }
 
     private val differCallback = object : DiffUtil.ItemCallback<BookResponse>() {
@@ -51,6 +52,11 @@ class AdapterBook() : RecyclerView.Adapter<AdapterBook.AdpterBooksViewHolder>() 
             author.text = book.authors[0]
             title.text = book.title
             description.text = book.description
+            card.setOnClickListener {
+                onItemClickListener?.let {
+                    it(differ.currentList[position])
+                }
+            }
         }
     }
 
@@ -58,4 +64,9 @@ class AdapterBook() : RecyclerView.Adapter<AdapterBook.AdpterBooksViewHolder>() 
       return differ.currentList.size
     }
 
+    private var onItemClickListener: ((BookResponse) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (BookResponse) -> Unit) {
+        onItemClickListener = listener
+    }
 }

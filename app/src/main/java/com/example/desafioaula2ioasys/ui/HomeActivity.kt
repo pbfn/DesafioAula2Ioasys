@@ -2,18 +2,23 @@ package com.example.desafioaula2ioasys.ui
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AbsListView
+import android.widget.*
+import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.desafioaula2ioasys.R
 import com.example.desafioaula2ioasys.adapters.AdapterBook
 import com.example.desafioaula2ioasys.databinding.ActivityHomeBinding
+import com.example.desafioaula2ioasys.databinding.BottonSheetLayoutBinding
 import com.example.desafioaula2ioasys.repository.BookRepository
 import com.example.desafioaula2ioasys.util.Resource
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class HomeActivity : AppCompatActivity() {
 
@@ -49,12 +54,12 @@ class HomeActivity : AppCompatActivity() {
             when (response) {
                 is Resource.Success -> {
                     hideProgessBar()
-                    response.data?.let {  booksResponse->
+                    response.data?.let { booksResponse ->
                         adapterBook.differ.submitList(booksResponse.data.toList())
                         val totalPages = booksResponse.totalPages
                         isLastPage = viewModel.booksPage == totalPages
-                        if(isLastPage){
-                            binding.recyclerBooks.setPadding(0,0,0,0)
+                        if (isLastPage) {
+                            binding.recyclerBooks.setPadding(0, 0, 0, 0)
                         }
                     }
                 }
@@ -75,6 +80,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val layout = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
         adapterBook = AdapterBook()
+        setupClickAdapter()
         binding.recyclerBooks.apply {
             adapter = adapterBook
             layoutManager = layout
@@ -115,6 +121,25 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupClickAdapter() {
+        adapterBook.setOnItemClickListener { book ->
+            val dialog = BottomSheetDialog(this)
+            val view = layoutInflater.inflate(R.layout.botton_sheet_layout, null)
+            view.apply {
+                val btnClose = findViewById<ImageButton>(R.id.button_close)
+                val textViewTitleBook =findViewById<TextView>(R.id.text_view_title)
+                val imageBook = findViewById<ImageView>(R.id.image_view_book)
+                Glide.with(this).load(book.imageUrl).into(imageBook)
+                textViewTitleBook.text = book.title
+                btnClose.setOnClickListener {
+                    dialog.dismiss()
+                }
+            }
+            dialog.setCancelable(false)
+            dialog.setContentView(view)
+            dialog.show()
+        }
+    }
 
     private fun hideProgessBar() {
         binding.progressBar.visibility = View.INVISIBLE
