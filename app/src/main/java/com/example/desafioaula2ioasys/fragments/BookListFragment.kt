@@ -1,42 +1,63 @@
-package com.example.desafioaula2ioasys.ui
+package com.example.desafioaula2ioasys.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.*
-import androidx.core.widget.TextViewCompat
+import android.view.ViewGroup
+import android.widget.AbsListView
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.desafioaula2ioasys.R
 import com.example.desafioaula2ioasys.adapters.AdapterBook
 import com.example.desafioaula2ioasys.databinding.ActivityHomeBinding
-import com.example.desafioaula2ioasys.databinding.BottonSheetLayoutBinding
+import com.example.desafioaula2ioasys.databinding.FragmentBookListBinding
 import com.example.desafioaula2ioasys.repository.BookRepository
+import com.example.desafioaula2ioasys.ui.BookViewModel
+import com.example.desafioaula2ioasys.ui.ViewModelProviderBook
 import com.example.desafioaula2ioasys.util.Resource
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class HomeActivity : AppCompatActivity() {
+class BookListFragment : Fragment() {
 
-    private lateinit var binding: ActivityHomeBinding
+
+    private var _binding: FragmentBookListBinding? = null
+    private val binding: FragmentBookListBinding get() = _binding!!
+    private val args: BookListFragmentArgs by navArgs()
+
     private lateinit var adapterBook: AdapterBook
     private lateinit var viewModel: BookViewModel
     private lateinit var token: String
-    private lateinit var sharedPref: SharedPreferences
     private var isScrolling = false
     private var isLoading = false
     private var isLastPage = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        sharedPref = getSharedPreferences("tokens", Context.MODE_PRIVATE) ?: return
-        token = sharedPref.getString("token", "null").toString()
-        setContentView(binding.root)
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = FragmentBookListBinding.inflate(inflater, container, false).apply {
+        _binding = this
+    }.root
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        token = args.token.toString()
         setupViewModel()
         observeData()
         setupRecyclerView()
@@ -50,7 +71,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        viewModel.listBooks.observe(this, { response ->
+        viewModel.listBooks.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgessBar()
@@ -78,15 +99,16 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        val layout = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+        val layout = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         adapterBook = AdapterBook()
         setupClickAdapter()
         binding.recyclerBooks.apply {
             adapter = adapterBook
             layoutManager = layout
-            addOnScrollListener(this@HomeActivity.scrollListener)
+            addOnScrollListener(scrollListener)
         }
     }
+
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -122,7 +144,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupClickAdapter() {
         adapterBook.setOnItemClickListener { book ->
-            val dialog = BottomSheetDialog(this)
+            val dialog = BottomSheetDialog(requireContext())
             val view = layoutInflater.inflate(R.layout.botton_sheet_layout, null)
             view.apply {
                 val btnClose = findViewById<ImageButton>(R.id.button_close)
@@ -149,4 +171,5 @@ class HomeActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.VISIBLE
         isLoading = true
     }
+
 }
