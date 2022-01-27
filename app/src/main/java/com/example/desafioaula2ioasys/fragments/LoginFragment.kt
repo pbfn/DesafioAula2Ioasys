@@ -1,7 +1,5 @@
 package com.example.desafioaula2ioasys.fragments
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.desafioaula2ioasys.R
 import com.example.desafioaula2ioasys.databinding.FragmentLoginBinding
 import com.example.desafioaula2ioasys.repository.LoginRepository
-import com.example.desafioaula2ioasys.ui.HomeActivity
 import com.example.desafioaula2ioasys.ui.LoginViewModel
 import com.example.desafioaula2ioasys.ui.ViewModelProviderLogin
 import com.example.desafioaula2ioasys.util.Resource

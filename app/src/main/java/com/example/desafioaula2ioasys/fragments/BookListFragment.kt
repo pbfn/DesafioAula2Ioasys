@@ -7,24 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.desafioaula2ioasys.R
 import com.example.desafioaula2ioasys.adapters.AdapterBook
-import com.example.desafioaula2ioasys.databinding.ActivityHomeBinding
 import com.example.desafioaula2ioasys.databinding.FragmentBookListBinding
 import com.example.desafioaula2ioasys.repository.BookRepository
 import com.example.desafioaula2ioasys.ui.BookViewModel
 import com.example.desafioaula2ioasys.ui.ViewModelProviderBook
 import com.example.desafioaula2ioasys.util.Resource
-import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class BookListFragment : Fragment() {
 
@@ -39,7 +32,6 @@ class BookListFragment : Fragment() {
     private var isScrolling = false
     private var isLoading = false
     private var isLastPage = false
-
 
 
     override fun onCreateView(
@@ -143,23 +135,28 @@ class BookListFragment : Fragment() {
     }
 
     private fun setupClickAdapter() {
+
         adapterBook.setOnItemClickListener { book ->
-            val dialog = BottomSheetDialog(requireContext())
-            val view = layoutInflater.inflate(R.layout.botton_sheet_layout, null)
-            view.apply {
-                val btnClose = findViewById<ImageButton>(R.id.button_close)
-                val textViewTitleBook =findViewById<TextView>(R.id.text_view_title)
-                val imageBook = findViewById<ImageView>(R.id.image_view_book)
-                Glide.with(this).load(book.imageUrl).into(imageBook)
-                textViewTitleBook.text = book.title
-                btnClose.setOnClickListener {
-                    dialog.dismiss()
-                }
-            }
-            dialog.setCancelable(false)
-            dialog.setContentView(view)
-            dialog.show()
+            BookDetailsBottomSheet.newInstance(book).show(childFragmentManager, "book")
         }
+
+//        adapterBook.setOnItemClickListener { book ->
+//            val dialog = BottomSheetDialog(requireContext())
+//            val view = layoutInflater.inflate(R.layout.botton_sheet_layout, null)
+//            view.apply {
+//                val btnClose = findViewById<ImageButton>(R.id.button_close)
+//                val textViewTitleBook =findViewById<TextView>(R.id.text_view_title)
+//                val imageBook = findViewById<ImageView>(R.id.image_view_book)
+//                Glide.with(this).load(book.imageUrl).into(imageBook)
+//                textViewTitleBook.text = book.title
+//                btnClose.setOnClickListener {
+//                    dialog.dismiss()
+//                }
+//            }
+//            dialog.setCancelable(false)
+//            dialog.setContentView(view)
+//            dialog.show()
+//        }
     }
 
     private fun hideProgessBar() {

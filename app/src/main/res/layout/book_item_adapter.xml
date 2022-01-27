@@ -7,8 +7,9 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="4dp"
     android:clickable="true"
-    android:elevation="24dp"
+    android:elevation="20dp"
     android:focusable="true"
+    android:longClickable="false"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="4dp">
 
