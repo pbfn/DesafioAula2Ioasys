@@ -1,7 +1,5 @@
-package com.example.desafioaula2ioasys.fragments
+package com.example.desafioaula2ioasys.presentation.ui.fragments
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,11 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.desafioaula2ioasys.adapters.AdapterBook
+import com.example.desafioaula2ioasys.presentation.adapters.AdapterBook
 import com.example.desafioaula2ioasys.databinding.FragmentBookListBinding
 import com.example.desafioaula2ioasys.repository.BookRepository
-import com.example.desafioaula2ioasys.ui.BookViewModel
-import com.example.desafioaula2ioasys.ui.ViewModelProviderBook
+import com.example.desafioaula2ioasys.presentation.viewmodel.BookViewModel
+import com.example.desafioaula2ioasys.presentation.viewmodel.ViewModelProviderBook
 import com.example.desafioaula2ioasys.util.Resource
 
 class BookListFragment : Fragment() {

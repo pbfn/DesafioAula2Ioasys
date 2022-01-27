@@ -1,9 +1,9 @@
-package com.example.desafioaula2ioasys.ui
+package com.example.desafioaula2ioasys.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.desafioaula2ioasys.models.ListBooksResponse
+import com.example.desafioaula2ioasys.domain.model.ListBooksResponse
 import com.example.desafioaula2ioasys.repository.BookRepository
 import com.example.desafioaula2ioasys.util.Resource
 import kotlinx.coroutines.launch

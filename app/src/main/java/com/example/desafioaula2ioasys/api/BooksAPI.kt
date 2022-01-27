@@ -1,6 +1,6 @@
 package com.example.desafioaula2ioasys.api
 
-import com.example.desafioaula2ioasys.models.*
+import com.example.desafioaula2ioasys.domain.model.*
 import retrofit2.Response
 import retrofit2.http.*
 

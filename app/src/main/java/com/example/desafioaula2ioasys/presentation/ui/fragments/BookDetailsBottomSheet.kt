@@ -1,4 +1,4 @@
-package com.example.desafioaula2ioasys.fragments
+package com.example.desafioaula2ioasys.presentation.ui.fragments
 
 import android.os.Bundle
 import android.text.SpannableString
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.desafioaula2ioasys.R
 import com.example.desafioaula2ioasys.databinding.BottomSheetBookDetailsBinding
-import com.example.desafioaula2ioasys.models.BookResponse
+import com.example.desafioaula2ioasys.domain.model.BookResponse
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

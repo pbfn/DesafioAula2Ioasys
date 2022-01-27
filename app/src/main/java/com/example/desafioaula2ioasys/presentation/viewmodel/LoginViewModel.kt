@@ -1,10 +1,10 @@
-package com.example.desafioaula2ioasys.ui
+package com.example.desafioaula2ioasys.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.desafioaula2ioasys.models.User
+import com.example.desafioaula2ioasys.domain.model.User
 import com.example.desafioaula2ioasys.repository.LoginRepository
 import com.example.desafioaula2ioasys.util.Resource
 import kotlinx.coroutines.launch

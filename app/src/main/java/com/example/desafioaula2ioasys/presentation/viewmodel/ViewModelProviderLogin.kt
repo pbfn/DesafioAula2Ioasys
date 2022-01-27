@@ -1,4 +1,4 @@
-package com.example.desafioaula2ioasys.ui
+package com.example.desafioaula2ioasys.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

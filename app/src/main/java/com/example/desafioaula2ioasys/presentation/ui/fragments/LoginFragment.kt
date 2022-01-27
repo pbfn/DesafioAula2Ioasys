@@ -1,4 +1,4 @@
-package com.example.desafioaula2ioasys.fragments
+package com.example.desafioaula2ioasys.presentation.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.desafioaula2ioasys.databinding.FragmentLoginBinding
 import com.example.desafioaula2ioasys.repository.LoginRepository
-import com.example.desafioaula2ioasys.ui.LoginViewModel
-import com.example.desafioaula2ioasys.ui.ViewModelProviderLogin
+import com.example.desafioaula2ioasys.presentation.viewmodel.LoginViewModel
+import com.example.desafioaula2ioasys.presentation.viewmodel.ViewModelProviderLogin
 import com.example.desafioaula2ioasys.util.Resource
 
 

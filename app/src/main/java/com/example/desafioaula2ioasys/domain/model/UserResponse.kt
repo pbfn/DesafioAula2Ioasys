@@ -1,4 +1,4 @@
-package com.example.desafioaula2ioasys.models
+package com.example.desafioaula2ioasys.domain.model
 
 data class UserResponse(
     val birthdate: String,

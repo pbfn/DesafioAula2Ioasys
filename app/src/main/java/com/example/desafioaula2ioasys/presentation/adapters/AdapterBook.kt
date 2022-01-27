@@ -1,14 +1,13 @@
-package com.example.desafioaula2ioasys.adapters
+package com.example.desafioaula2ioasys.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.desafioaula2ioasys.databinding.BookItemAdapterBinding
-import com.example.desafioaula2ioasys.models.BookResponse
+import com.example.desafioaula2ioasys.domain.model.BookResponse
 
 class AdapterBook() : RecyclerView.Adapter<AdapterBook.AdpterBooksViewHolder>() {
 

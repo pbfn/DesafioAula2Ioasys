@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DesafioAula2Ioasys">
         <activity
-            android:name=".ui.HomeActivity"
+            android:name="com.example.desafioaula2ioasys.presentation.ui.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
