@@ -5,20 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.desafioaula2ioasys.databinding.FragmentLoginBinding
 import com.example.desafioaula2ioasys.domain.repositories.LoginRepository
 import com.example.desafioaula2ioasys.presentation.viewmodel.LoginViewModel
 import com.example.desafioaula2ioasys.presentation.viewmodel.ViewModelProviderLogin
 import com.example.desafioaula2ioasys.util.Resource
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding: FragmentLoginBinding get() = _binding!!
-    private val viewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupViewModel()
+        //setupViewModel()
         observeData()
         initComponents()
     }
@@ -53,15 +53,15 @@ class LoginFragment : Fragment() {
     }
 
     private fun doLogin() {
-        viewModel.doLogin(
+        loginViewModel.doLogin(
             binding.editTextEmail.text.toString(),
             binding.editTextPassword.text.toString()
         )
     }
 
     private fun setupViewModel() {
-        val repository = LoginRepository()
-        val viewModelProvider = ViewModelProviderLogin(repository)
+        //val repository = LoginRepository()
+        //val viewModelProvider = ViewModelProviderLogin(repository)
         //viewModel = ViewModelProvider(this, viewModelProvider).get(LoginViewModel::class.java)
     }
 
@@ -79,24 +79,24 @@ class LoginFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.responseLogin.observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    findNavController().navigate(
-                        LoginFragmentDirections.actionLoginFragmentToBookListFragment(response.data)
-                    )
-                }
-                is Resource.Loading -> {
-                    binding.textViewResponse.visibility = View.GONE
-                    showProgressBar()
-                }
-                is Resource.Error -> {
-                    binding.textViewResponse.visibility = View.VISIBLE
-                    binding.textViewResponse.text = response.message
-                    hideProgressBar()
-                }
-            }
-        })
+//        loginViewModel.responseLogin.observe(viewLifecycleOwner, { response ->
+//            when (response) {
+//                is Resource.Success -> {
+//                    findNavController().navigate(
+//                        LoginFragmentDirections.actionLoginFragmentToBookListFragment(response.data)
+//                    )
+//                }
+//                is Resource.Loading -> {
+//                    binding.textViewResponse.visibility = View.GONE
+//                    showProgressBar()
+//                }
+//                is Resource.Error -> {
+//                    binding.textViewResponse.visibility = View.VISIBLE
+//                    binding.textViewResponse.text = response.message
+//                    hideProgressBar()
+//                }
+//            }
+//        })
     }
 
     private fun hideProgressBar() {

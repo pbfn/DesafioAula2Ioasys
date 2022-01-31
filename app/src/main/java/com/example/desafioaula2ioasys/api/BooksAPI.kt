@@ -23,7 +23,7 @@ interface BooksAPI {
     @POST("auth/sign-in")
     suspend fun doLogin(
         @Body user: User
-    ): Response<UserResponse>
+    ): Response<User>
 
 
 }

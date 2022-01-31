@@ -1,7 +1,8 @@
 package com.example.desafioaula2ioasys.domain.model
 
-data class User (
-    val email:String,
-    val password:String
+data class User(
+    val birthdate: String,
+    val gender: String,
+    val id: String,
+    val name: String
 )
-
