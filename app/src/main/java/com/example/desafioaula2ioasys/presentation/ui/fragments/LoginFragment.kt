@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.desafioaula2ioasys.databinding.FragmentLoginBinding
-import com.example.desafioaula2ioasys.repository.LoginRepository
+import com.example.desafioaula2ioasys.domain.repositories.LoginRepository
 import com.example.desafioaula2ioasys.presentation.viewmodel.LoginViewModel
 import com.example.desafioaula2ioasys.presentation.viewmodel.ViewModelProviderLogin
 import com.example.desafioaula2ioasys.util.Resource
@@ -18,7 +18,7 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding: FragmentLoginBinding get() = _binding!!
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +62,7 @@ class LoginFragment : Fragment() {
     private fun setupViewModel() {
         val repository = LoginRepository()
         val viewModelProvider = ViewModelProviderLogin(repository)
-        viewModel = ViewModelProvider(this, viewModelProvider).get(LoginViewModel::class.java)
+        //viewModel = ViewModelProvider(this, viewModelProvider).get(LoginViewModel::class.java)
     }
 
 
@@ -100,11 +100,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun hideProgressBar() {
-        // binding.progressBar.visibility = View.INVISIBLE
+         binding.progressBar.visibility = View.INVISIBLE
     }
 
     private fun showProgressBar() {
-        //binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
     }
 
 }

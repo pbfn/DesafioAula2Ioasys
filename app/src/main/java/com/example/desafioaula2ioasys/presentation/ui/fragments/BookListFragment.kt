@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafioaula2ioasys.presentation.adapters.AdapterBook
 import com.example.desafioaula2ioasys.databinding.FragmentBookListBinding
-import com.example.desafioaula2ioasys.repository.BookRepository
-import com.example.desafioaula2ioasys.presentation.viewmodel.BookViewModel
+import com.example.desafioaula2ioasys.domain.repositories.BookRepository
+import com.example.desafioaula2ioasys.presentation.viewmodel.BookListViewModel
 import com.example.desafioaula2ioasys.presentation.viewmodel.ViewModelProviderBook
 import com.example.desafioaula2ioasys.util.Resource
 
@@ -25,7 +25,7 @@ class BookListFragment : Fragment() {
     private val args: BookListFragmentArgs by navArgs()
 
     private lateinit var adapterBook: AdapterBook
-    private lateinit var viewModel: BookViewModel
+    private lateinit var viewModel: BookListViewModel
     private lateinit var token: String
     private var isScrolling = false
     private var isLoading = false
@@ -57,7 +57,7 @@ class BookListFragment : Fragment() {
     private fun setupViewModel() {
         val repository = BookRepository()
         val viewModelProvider = ViewModelProviderBook(repository)
-        viewModel = ViewModelProvider(this, viewModelProvider).get(BookViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelProvider).get(BookListViewModel::class.java)
     }
 
     private fun observeData() {

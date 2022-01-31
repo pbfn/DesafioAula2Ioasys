@@ -1,4 +1,4 @@
-package com.example.desafioaula2ioasys.repository
+package com.example.desafioaula2ioasys.domain.repositories
 
 import com.example.desafioaula2ioasys.api.RetrofitInstance
 

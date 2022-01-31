@@ -9,13 +9,15 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image_background"
-        android:background="@drawable/background_image_login"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/background_image_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image_view_logo"
@@ -25,7 +27,8 @@
         android:src="@drawable/ic_logo_withe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.365" />
 
     <TextView
         android:id="@+id/text_view_title"
@@ -116,7 +119,7 @@
         app:layout_constraintTop_toTopOf="@+id/text_input_password" />
 
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_view_response"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
@@ -130,5 +133,16 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_input_password" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/image_background"
+        app:layout_constraintEnd_toEndOf="@+id/image_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
