@@ -19,7 +19,7 @@ class LoginViewModel(
     var responseLogin: LiveData<Resource<String>> = _responseLogin
 
     init {
-        //doLogin("desafio@ioasys.com.br","12341234")
+        doLogin("desafio@ioasys.com.br","12341234")
     }
 
     fun doLogin(email:String,password:String)   {
@@ -27,8 +27,8 @@ class LoginViewModel(
             _responseLogin.postValue(Resource.Loading())
             try {
                 loginRepository.doLogin(email, password).collect { user->
-                    if(user.name.isNotEmpty()){
-                       _responseLogin.postValue(Resource.Success("Deu certo"))
+                    if(user.accessToken.isNotEmpty()){
+                       _responseLogin.postValue(Resource.Success(user.accessToken))
                     }
                 }
             }catch (err:Exception){

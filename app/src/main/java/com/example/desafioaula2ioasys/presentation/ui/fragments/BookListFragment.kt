@@ -16,6 +16,7 @@ import com.example.desafioaula2ioasys.domain.repositories.BooksRepository
 import com.example.desafioaula2ioasys.presentation.viewmodel.BookListViewModel
 import com.example.desafioaula2ioasys.presentation.viewmodel.ViewModelProviderBook
 import com.example.desafioaula2ioasys.util.Resource
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BookListFragment : Fragment() {
@@ -23,7 +24,9 @@ class BookListFragment : Fragment() {
 
     private var _binding: FragmentBookListBinding? = null
     private val binding: FragmentBookListBinding get() = _binding!!
-    private val bookListViewModel: BookListViewModel by viewModel()
+    private val bookListViewModel: BookListViewModel by lazy {
+        getViewModel()
+    }
     private val args: BookListFragmentArgs by navArgs()
 
     private lateinit var adapterBook: AdapterBook
@@ -49,17 +52,11 @@ class BookListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         token = args.token.toString()
-        setupViewModel()
         observeData()
         setupRecyclerView()
         initBooks()
     }
 
-    private fun setupViewModel() {
-       // val repository = BooksRepository()
-        //val viewModelProvider = ViewModelProviderBook(repository)
-       // bookListViewModel = ViewModelProvider(this, viewModelProvider).get(BookListViewModel::class.java)
-    }
 
     private fun observeData() {
         bookListViewModel.listBooks.observe(viewLifecycleOwner, { response ->
