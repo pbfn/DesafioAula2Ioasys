@@ -28,23 +28,31 @@ class BookListViewModel(
     fun getListBooks(token: String) = viewModelScope.launch {
         if (booksPage < totalPages) {
             getBooks(token)
-           // _listBooks.postValue(handleListBookResponse(response))
         }
     }
 
-    private fun getBooks(token: String){
-            viewModelScope.launch {
-                _listBooks.postValue(Resource.Loading())
-                try {
-                    booksRepository.getBooks(token,booksPage,20).collect { listBooks->
-                        if(listBooks.data.isNotEmpty()){
-                            _listBooks.postValue(Resource.Success(listBooks))
+    private fun getBooks(token: String) {
+        viewModelScope.launch {
+            _listBooks.postValue(Resource.Loading())
+            try {
+                booksRepository.getBooks(token, booksPage, 20).collect { responseBooks ->
+                    if (responseBooks.data.isNotEmpty()) {
+                        booksPage++
+                        totalPages = responseBooks.totalPages
+                        if (listBooksResponse == null) {
+                            listBooksResponse = responseBooks
+                        } else {
+                            val oldBooks = listBooksResponse?.data
+                            val newBooks = responseBooks.data
+                            oldBooks?.addAll(newBooks)
                         }
+                        _listBooks.postValue(Resource.Success(listBooksResponse ?: responseBooks))
                     }
-                }catch (err:Exception){
-
                 }
+            } catch (err: Exception) {
+
             }
+        }
 //        if (response.isSuccessful) {
 //            response.body()?.let { resultResponse ->
 //                booksPage++
@@ -72,15 +80,16 @@ class BookListViewModel(
             }
         }
     }
-    fun search(input: String){
+
+    fun search(input: String) {
         viewModelScope.launch {
-            searchBooks(input).let { books->
+            searchBooks(input).let { books ->
                 if (books != null) {
-                    when{
-                        books.isNotEmpty()->{
+                    when {
+                        books.isNotEmpty() -> {
 
                         }
-                        else ->{
+                        else -> {
 
                         }
                     }
