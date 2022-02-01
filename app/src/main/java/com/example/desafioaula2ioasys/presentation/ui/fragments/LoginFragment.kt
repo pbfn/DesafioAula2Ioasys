@@ -7,12 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.desafioaula2ioasys.databinding.FragmentLoginBinding
-import com.example.desafioaula2ioasys.domain.repositories.LoginRepository
 import com.example.desafioaula2ioasys.presentation.viewmodel.LoginViewModel
-import com.example.desafioaula2ioasys.presentation.viewmodel.ViewModelProviderLogin
 import com.example.desafioaula2ioasys.util.Resource
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LoginFragment : Fragment() {

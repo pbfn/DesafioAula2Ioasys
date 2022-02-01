@@ -14,7 +14,6 @@ import com.example.desafioaula2ioasys.presentation.adapters.AdapterBook
 import com.example.desafioaula2ioasys.databinding.FragmentBookListBinding
 import com.example.desafioaula2ioasys.domain.repositories.BooksRepository
 import com.example.desafioaula2ioasys.presentation.viewmodel.BookListViewModel
-import com.example.desafioaula2ioasys.presentation.viewmodel.ViewModelProviderBook
 import com.example.desafioaula2ioasys.util.Resource
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
