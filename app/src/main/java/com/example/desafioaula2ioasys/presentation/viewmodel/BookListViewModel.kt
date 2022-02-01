@@ -6,13 +6,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.desafioaula2ioasys.domain.model.BookResponse
 import com.example.desafioaula2ioasys.domain.model.ListBooksResponse
-import com.example.desafioaula2ioasys.domain.repositories.BookRepository
+import com.example.desafioaula2ioasys.domain.repositories.BooksRepository
 import com.example.desafioaula2ioasys.util.Resource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.lang.Exception
 
 class BookListViewModel(
-    val repository: BookRepository
+    val booksRepository: BooksRepository
 ) : ViewModel() {
 
     val _listBooks: MutableLiveData<Resource<ListBooksResponse>> = MutableLiveData()
@@ -24,28 +27,39 @@ class BookListViewModel(
 
     fun getListBooks(token: String) = viewModelScope.launch {
         if (booksPage < totalPages) {
-            _listBooks.postValue(Resource.Loading())
-            val response = repository.getBooks(token, booksPage, 20)
-            _listBooks.postValue(handleListBookResponse(response))
+            getBooks(token)
+           // _listBooks.postValue(handleListBookResponse(response))
         }
     }
 
-    private fun handleListBookResponse(response: Response<ListBooksResponse>): Resource<ListBooksResponse> {
-        if (response.isSuccessful) {
-            response.body()?.let { resultResponse ->
-                booksPage++
-                totalPages = resultResponse.totalPages
-                if (listBooksResponse == null) {
-                    listBooksResponse = resultResponse
-                } else {
-                    val oldBooks = listBooksResponse?.data
-                    val newBooks = resultResponse.data
-                    oldBooks?.addAll(newBooks)
+    private fun getBooks(token: String){
+            viewModelScope.launch {
+                _listBooks.postValue(Resource.Loading())
+                try {
+                    booksRepository.getBooks(token,booksPage,20).collect { listBooks->
+                        if(listBooks.data.isNotEmpty()){
+                            _listBooks.postValue(Resource.Success(listBooks))
+                        }
+                    }
+                }catch (err:Exception){
+
                 }
-                return Resource.Success(listBooksResponse ?: resultResponse)
             }
-        }
-        return Resource.Error(response.message())
+//        if (response.isSuccessful) {
+//            response.body()?.let { resultResponse ->
+//                booksPage++
+//                totalPages = resultResponse.totalPages
+//                if (listBooksResponse == null) {
+//                    listBooksResponse = resultResponse
+//                } else {
+//                    val oldBooks = listBooksResponse?.data
+//                    val newBooks = resultResponse.data
+//                    oldBooks?.addAll(newBooks)
+//                }
+//                return Resource.Success(listBooksResponse ?: resultResponse)
+//            }
+//        }
+//        return Resource.Error(response.message())
 
     }
 

@@ -12,20 +12,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafioaula2ioasys.presentation.adapters.AdapterBook
 import com.example.desafioaula2ioasys.databinding.FragmentBookListBinding
-import com.example.desafioaula2ioasys.domain.repositories.BookRepository
+import com.example.desafioaula2ioasys.domain.repositories.BooksRepository
 import com.example.desafioaula2ioasys.presentation.viewmodel.BookListViewModel
 import com.example.desafioaula2ioasys.presentation.viewmodel.ViewModelProviderBook
 import com.example.desafioaula2ioasys.util.Resource
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BookListFragment : Fragment() {
 
 
     private var _binding: FragmentBookListBinding? = null
     private val binding: FragmentBookListBinding get() = _binding!!
+    private val bookListViewModel: BookListViewModel by viewModel()
     private val args: BookListFragmentArgs by navArgs()
 
     private lateinit var adapterBook: AdapterBook
-    private lateinit var viewModel: BookListViewModel
     private lateinit var token: String
     private var isScrolling = false
     private var isLoading = false
@@ -55,20 +56,20 @@ class BookListFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        val repository = BookRepository()
-        val viewModelProvider = ViewModelProviderBook(repository)
-        viewModel = ViewModelProvider(this, viewModelProvider).get(BookListViewModel::class.java)
+       // val repository = BooksRepository()
+        //val viewModelProvider = ViewModelProviderBook(repository)
+       // bookListViewModel = ViewModelProvider(this, viewModelProvider).get(BookListViewModel::class.java)
     }
 
     private fun observeData() {
-        viewModel.listBooks.observe(viewLifecycleOwner, { response ->
+        bookListViewModel.listBooks.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgessBar()
                     response.data?.let { booksResponse ->
                         adapterBook.differ.submitList(booksResponse.data.toList())
                         val totalPages = booksResponse.totalPages
-                        isLastPage = viewModel.booksPage == totalPages
+                        isLastPage = bookListViewModel.booksPage == totalPages
                         if (isLastPage) {
                             binding.recyclerBooks.setPadding(0, 0, 0, 0)
                         }
@@ -85,7 +86,7 @@ class BookListFragment : Fragment() {
     }
 
     private fun initBooks() {
-        viewModel.getListBooks("Bearer $token")
+        bookListViewModel.getListBooks("Bearer $token")
     }
 
     private fun setupRecyclerView() {
@@ -126,7 +127,7 @@ class BookListFragment : Fragment() {
                 isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanVisible
 
             if (shouldPaginate) {
-                viewModel.getListBooks("Bearer $token")
+                bookListViewModel.getListBooks("Bearer $token")
                 isScrolling = false
             }
         }
