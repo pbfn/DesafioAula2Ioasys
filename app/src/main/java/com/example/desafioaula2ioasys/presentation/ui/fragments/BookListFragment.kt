@@ -26,10 +26,8 @@ class BookListFragment : Fragment() {
     private val bookListViewModel: BookListViewModel by lazy {
         getViewModel()
     }
-    private val args: BookListFragmentArgs by navArgs()
 
     private lateinit var adapterBook: AdapterBook
-    private lateinit var token: String
     private var isScrolling = false
     private var isLoading = false
     private var isLastPage = false
@@ -49,8 +47,6 @@ class BookListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        token = args.token.toString()
         observeData()
         setupRecyclerView()
         initBooks()
@@ -82,7 +78,7 @@ class BookListFragment : Fragment() {
     }
 
     private fun initBooks() {
-        bookListViewModel.getListBooks("Bearer $token")
+        bookListViewModel.getListBooks()
     }
 
     private fun setupRecyclerView() {
@@ -123,7 +119,7 @@ class BookListFragment : Fragment() {
                 isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanVisible
 
             if (shouldPaginate) {
-                bookListViewModel.getListBooks("Bearer $token")
+                bookListViewModel.getListBooks()
                 isScrolling = false
             }
         }

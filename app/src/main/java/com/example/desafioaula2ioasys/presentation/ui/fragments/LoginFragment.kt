@@ -76,7 +76,7 @@ class LoginFragment : Fragment() {
             when (response) {
                 is Resource.Success -> {
                     findNavController().navigate(
-                        LoginFragmentDirections.actionLoginFragmentToBookListFragment(response.data)
+                        LoginFragmentDirections.actionLoginFragmentToBookListFragment()
                     )
                 }
                 is Resource.Loading -> {

@@ -19,9 +19,5 @@
         android:name="com.example.desafioaula2ioasys.presentation.ui.fragments.BookListFragment"
         android:label="fragment_book_list"
         tools:layout="@layout/fragment_book_list" >
-        <argument
-            android:name="token"
-            app:argType="string"
-            app:nullable="true" />
     </fragment>
 </navigation>

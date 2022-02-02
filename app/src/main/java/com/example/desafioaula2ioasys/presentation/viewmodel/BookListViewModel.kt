@@ -25,17 +25,17 @@ class BookListViewModel(
     var listBooksResponse: ListBooksResponse? = null
 
 
-    fun getListBooks(token: String) = viewModelScope.launch {
+    fun getListBooks() = viewModelScope.launch {
         if (booksPage < totalPages) {
-            getBooks(token)
+            getBooks()
         }
     }
 
-    private fun getBooks(token: String) {
+    private fun getBooks() {
         viewModelScope.launch {
             _listBooks.postValue(Resource.Loading())
             try {
-                booksRepository.getBooks(token, booksPage, 20).collect { responseBooks ->
+                booksRepository.getBooks( booksPage, 20).collect { responseBooks ->
                     if (responseBooks.data.isNotEmpty()) {
                         booksPage++
                         totalPages = responseBooks.totalPages
