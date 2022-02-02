@@ -1,7 +1,7 @@
-package com.example.desafioaula2ioasys.data.mappers
+package com.example.desafioaula2ioasys.data_remote.mappers
 
 
-import com.example.desafioaula2ioasys.data.model.BooksListResponse
+import com.example.desafioaula2ioasys.data_remote.model.BooksListResponse
 import com.example.desafioaula2ioasys.domain.model.ListBooksResponse
 
 fun BooksListResponse.toDomain() = ListBooksResponse(

@@ -1,4 +1,4 @@
-package com.example.desafioaula2ioasys.data.data_remote.utils
+package com.example.desafioaula2ioasys.data_remote.utils
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Dispatcher

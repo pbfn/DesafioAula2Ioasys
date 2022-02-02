@@ -1,7 +1,7 @@
-package com.example.desafioaula2ioasys.data.data_remote.service
+package com.example.desafioaula2ioasys.data_remote.service
 
-import com.example.desafioaula2ioasys.data.model.LoginRequest
-import com.example.desafioaula2ioasys.data.model.LoginResponse
+import com.example.desafioaula2ioasys.data_remote.model.LoginRequest
+import com.example.desafioaula2ioasys.data_remote.model.LoginResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers

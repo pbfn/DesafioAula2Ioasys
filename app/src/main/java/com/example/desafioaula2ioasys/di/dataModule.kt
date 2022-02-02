@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 val dataModule = module {
     single<LoginRepository> {
-        LoginRepositoryImpl(get())
+        LoginRepositoryImpl(get(),get())
     }
 
     single<BooksRepository> {

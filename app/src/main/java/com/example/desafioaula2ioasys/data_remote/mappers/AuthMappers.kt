@@ -1,6 +1,6 @@
-package com.example.desafioaula2ioasys.data.mappers
+package com.example.desafioaula2ioasys.data_remote.mappers
 
-import com.example.desafioaula2ioasys.data.model.LoginResponse
+import com.example.desafioaula2ioasys.data_remote.model.LoginResponse
 import com.example.desafioaula2ioasys.domain.model.User
 
 fun LoginResponse.toDomain(accessToken:String) = User(
