@@ -17,9 +17,8 @@ interface BookService {
         @Query("page")
         page: Int = 1,
         @Query("amount")
-        amount: Int = 20
+        amount: Int = 20,
+        @Query("title")
+        titleSearch: String = ""
     ): Response<BooksListResponse>
-
-    @GET("books/{id}")
-    suspend fun getBookById(): Response<Book>
 }

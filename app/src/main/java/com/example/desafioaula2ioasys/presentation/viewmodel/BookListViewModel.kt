@@ -34,7 +34,8 @@ class BookListViewModel(
             _listBooks.postValue(Resource.Loading())
             getBookListUseCase(
                 params = GetBookListUseCase.Params(
-                    page = booksPage
+                    page = booksPage,
+                    titleSearch = ""
                 ),
                 onSuccess = { responseBooks ->
                     booksPage++
@@ -48,7 +49,7 @@ class BookListViewModel(
                     }
                     saveBooksUseCase(
                         params = SaveBooksUseCase.Params(
-                            bookList= listBooksResponse!!.data
+                            bookList = listBooksResponse!!.data
                         )
                     )
                     _listBooks.postValue(Resource.Success(listBooksResponse ?: responseBooks))

@@ -11,9 +11,14 @@ import kotlinx.coroutines.flow.flow
 class BooksDataSourceImpl(
     private val booksService: BookService
 ) : BooksRemoteDataSource {
-    override fun getBooks(token: String, page: Int, amount: Int): Flow<ListBooks> = flow {
-        val response = booksService.getBooks(token,page, amount)
-        if(response.isSuccessful){
+    override fun getBooks(
+        token: String,
+        page: Int,
+        amount: Int,
+        titleSearch: String
+    ): Flow<ListBooks> = flow {
+        val response = booksService.getBooks(token, page, amount)
+        if (response.isSuccessful) {
             response.body()?.let {
                 emit(it.toDomain())
             }
