@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.desafioaula2ioasys.R
 import com.example.desafioaula2ioasys.databinding.BottomSheetBookDetailsBinding
-import com.example.desafioaula2ioasys.domain.model.BookResponse
+import com.example.desafioaula2ioasys.domain.model.Book
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -19,7 +19,7 @@ class BookDetailsBottomSheet : BottomSheetDialogFragment() {
     private var _binding: BottomSheetBookDetailsBinding? = null
     private val binding: BottomSheetBookDetailsBinding get() = _binding!!
 
-    private var book: BookResponse? = null
+    private var book: Book? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,7 +76,7 @@ class BookDetailsBottomSheet : BottomSheetDialogFragment() {
     }
 
     companion object {
-        fun newInstance(book: BookResponse? = null): BookDetailsBottomSheet {
+        fun newInstance(book: Book? = null): BookDetailsBottomSheet {
             return BookDetailsBottomSheet().apply {
                 this.book = book
             }

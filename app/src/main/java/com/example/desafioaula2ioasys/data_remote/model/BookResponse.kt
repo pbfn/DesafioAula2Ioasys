@@ -4,27 +4,27 @@ import com.google.gson.annotations.SerializedName
 
 data class BookResponse(
     @SerializedName("authors")
-    val authors: List<String>,
+    val authors: List<String>?=null,
     @SerializedName("category")
-    val category: String,
+    val category: String?=null,
     @SerializedName("description")
-    val description: String,
+    val description: String?=null,
     @SerializedName("id")
     val id: String,
     @SerializedName("imageUrl")
-    val imageUrl: String,
+    val imageUrl: String?=null,
     @SerializedName("isbn10")
-    val isbn10: String,
+    val isbn10: String?=null,
     @SerializedName("isbn13")
-    val isbn13: String,
+    val isbn13: String?=null,
     @SerializedName("language")
-    val language: String,
+    val language: String?=null,
     @SerializedName("pageCount")
-    val pageCount: Int,
+    val pageCount: Int?=null,
     @SerializedName("published")
-    val published: Int,
+    val published: Int?=null,
     @SerializedName("publisher")
-    val publisher: String,
+    val publisher: String?=null,
     @SerializedName("title")
-    val title: String
+    val title: String?=null
 )

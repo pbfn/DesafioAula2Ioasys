@@ -1,7 +1,7 @@
 package com.example.desafioaula2ioasys.data_remote.service
 
 import com.example.desafioaula2ioasys.data_remote.model.BooksListResponse
-import com.example.desafioaula2ioasys.domain.model.BookResponse
+import com.example.desafioaula2ioasys.domain.model.Book
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -21,5 +21,5 @@ interface BookService {
     ): Response<BooksListResponse>
 
     @GET("books/{id}")
-    suspend fun getBookById(): Response<BookResponse>
+    suspend fun getBookById(): Response<Book>
 }

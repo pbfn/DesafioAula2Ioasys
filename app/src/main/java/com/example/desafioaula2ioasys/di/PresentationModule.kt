@@ -8,5 +8,5 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 
 val presentationModule = module {
     viewModel { LoginViewModel(get()) }
-    viewModel { BookListViewModel(get()) }
+    viewModel { BookListViewModel(get(),get()) }
 }
