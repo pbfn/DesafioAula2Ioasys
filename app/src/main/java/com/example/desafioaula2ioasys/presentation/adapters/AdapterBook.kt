@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.desafioaula2ioasys.databinding.BookItemAdapterBinding
-import com.example.desafioaula2ioasys.domain.model.BookResponse
+import com.example.desafioaula2ioasys.domain.model.Book
 
 class AdapterBook() : RecyclerView.Adapter<AdapterBook.AdpterBooksViewHolder>() {
 
@@ -21,12 +21,12 @@ class AdapterBook() : RecyclerView.Adapter<AdapterBook.AdpterBooksViewHolder>() 
         val card = itemView.cardBook
     }
 
-    private val differCallback = object : DiffUtil.ItemCallback<BookResponse>() {
-        override fun areItemsTheSame(oldItem: BookResponse, newItem: BookResponse): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<Book>() {
+        override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: BookResponse, newItem: BookResponse): Boolean {
+        override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem == newItem
         }
 
@@ -49,7 +49,7 @@ class AdapterBook() : RecyclerView.Adapter<AdapterBook.AdpterBooksViewHolder>() 
             Glide.with(this).load(book.imageUrl).into(holder.image)
         }
         holder.apply {
-            author.text = book.authors[0]
+            author.text = book.authors?.get(0)
             title.text = book.title
             description.text = book.description
             card.setOnClickListener {
@@ -64,9 +64,9 @@ class AdapterBook() : RecyclerView.Adapter<AdapterBook.AdpterBooksViewHolder>() 
       return differ.currentList.size
     }
 
-    private var onItemClickListener: ((BookResponse) -> Unit)? = null
+    private var onItemClickListener: ((Book) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (BookResponse) -> Unit) {
+    fun setOnItemClickListener(listener: (Book) -> Unit) {
         onItemClickListener = listener
     }
 }
