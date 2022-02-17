@@ -69,8 +69,17 @@ class BookListViewModel(
                 params = SearchBookListUseCase.Params(
                     titleSearch = titleSearch
                 ),
-                onSuccess = {
-                    _listBooks.postValue(Resource.Success(it))
+                onSuccess = { list ->
+                    if (list.data.isEmpty()) {
+                        _listBooks.postValue(
+                            Resource.Error(
+                                "Não encontramos nenhum\n" +
+                                        "livro com esses termos. "
+                            ,list)
+                        )
+                    } else {
+                        _listBooks.postValue(Resource.Success(list))
+                    }
                 },
                 onError = {
                     _listBooks.postValue(it.message?.let { it1 -> Resource.Error(it1) })

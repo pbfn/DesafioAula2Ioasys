@@ -54,7 +54,7 @@ class BookListFragment : Fragment() {
     }
 
     private fun configureListeners() {
-        binding.searchView2.textChangeListener = { input ->
+        binding.searchView.textChangeListener = { input ->
         bookListViewModel.searchBooks(input)
         }
     }
@@ -64,6 +64,7 @@ class BookListFragment : Fragment() {
             when (response) {
                 is Resource.Success -> {
                     hideProgessBar()
+                    hideMessage()
                     response.data?.let { booksResponse ->
                         adapterBook.differ.submitList(booksResponse.data.toList())
                         val totalPages = booksResponse.totalPages
@@ -74,9 +75,14 @@ class BookListFragment : Fragment() {
                     }
                 }
                 is Resource.Loading -> {
+                    hideMessage()
                     showProgressBar()
                 }
                 is Resource.Error -> {
+                    showMessage(response.message)
+                    response.data?.let{ booksResponse ->
+                        adapterBook.differ.submitList(booksResponse.data.toList())
+                    }
                     hideProgessBar()
                 }
             }
@@ -134,38 +140,28 @@ class BookListFragment : Fragment() {
     }
 
     private fun setupClickAdapter() {
-
         adapterBook.setOnItemClickListener { book ->
             BookDetailsBottomSheet.newInstance(book).show(childFragmentManager, "book")
         }
-
-//        adapterBook.setOnItemClickListener { book ->
-//            val dialog = BottomSheetDialog(requireContext())
-//            val view = layoutInflater.inflate(R.layout.botton_sheet_layout, null)
-//            view.apply {
-//                val btnClose = findViewById<ImageButton>(R.id.button_close)
-//                val textViewTitleBook =findViewById<TextView>(R.id.text_view_title)
-//                val imageBook = findViewById<ImageView>(R.id.image_view_book)
-//                Glide.with(this).load(book.imageUrl).into(imageBook)
-//                textViewTitleBook.text = book.title
-//                btnClose.setOnClickListener {
-//                    dialog.dismiss()
-//                }
-//            }
-//            dialog.setCancelable(false)
-//            dialog.setContentView(view)
-//            dialog.show()
-//        }
     }
 
     private fun hideProgessBar() {
-        binding.progressBar.visibility = View.INVISIBLE
+        binding.progressBar.visibility = View.GONE
         isLoading = false
     }
 
     private fun showProgressBar() {
         binding.progressBar.visibility = View.VISIBLE
         isLoading = true
+    }
+
+    private fun hideMessage(){
+        binding.textViewEmptyList.visibility = View.GONE
+    }
+
+    private fun showMessage(message:String?){
+        binding.textViewEmptyList.visibility = View.VISIBLE
+        binding.textViewEmptyList.text = message
     }
 
 }
