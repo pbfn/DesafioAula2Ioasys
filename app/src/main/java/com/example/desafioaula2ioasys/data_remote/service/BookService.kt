@@ -15,10 +15,23 @@ interface BookService {
     suspend fun getBooks(
         @Header("Authorization") token: String,
         @Query("page")
-        page: Int = 1,
+        page: Double = 1.0,
         @Query("amount")
         amount: Int = 20,
         @Query("title")
         titleSearch: String = ""
     ): Response<BooksListResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("books")
+    suspend fun searchBooks(
+        @Header("Authorization") token: String,
+        @Query("page")
+        page: Int = 1,
+        @Query("amount")
+        amount: Int = 200,
+        @Query("title")
+        titleSearch: String? = ""
+    ): Response<BooksListResponse>
+
 }

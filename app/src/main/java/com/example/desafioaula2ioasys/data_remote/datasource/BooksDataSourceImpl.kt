@@ -13,11 +13,19 @@ class BooksDataSourceImpl(
 ) : BooksRemoteDataSource {
     override fun getBooks(
         token: String,
-        page: Int,
-        amount: Int,
-        titleSearch: String
+        page: Double,
+        amount: Int
     ): Flow<ListBooks> = flow {
         val response = booksService.getBooks(token, page, amount)
+        if (response.isSuccessful) {
+            response.body()?.let {
+                emit(it.toDomain())
+            }
+        }
+    }
+
+    override fun searchBooks(token: String, titleSearch: String?): Flow<ListBooks> = flow{
+        val response = booksService.searchBooks(token = token,titleSearch = titleSearch)
         if (response.isSuccessful) {
             response.body()?.let {
                 emit(it.toDomain())

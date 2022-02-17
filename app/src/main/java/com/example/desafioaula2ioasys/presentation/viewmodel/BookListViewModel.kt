@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.desafioaula2ioasys.domain.model.ListBooks
 import com.example.desafioaula2ioasys.domain.usecase.GetBookListUseCase
+import com.example.desafioaula2ioasys.domain.usecase.SearchBookListUseCase
 import com.example.desafioaula2ioasys.domain.usecase.utils.SaveBooksUseCase
 import com.example.desafioaula2ioasys.util.Resource
 
@@ -13,13 +14,14 @@ import kotlinx.coroutines.launch
 
 class BookListViewModel(
     val getBookListUseCase: GetBookListUseCase,
-    val saveBooksUseCase: SaveBooksUseCase
+    val saveBooksUseCase: SaveBooksUseCase,
+    val searchBookListUseCase: SearchBookListUseCase
 ) : ViewModel() {
 
-    val _listBooks: MutableLiveData<Resource<ListBooks>> = MutableLiveData()
+    private val _listBooks: MutableLiveData<Resource<ListBooks>> = MutableLiveData()
     val listBooks = _listBooks as LiveData<Resource<ListBooks>>
-    var booksPage: Int = 1
-    var totalPages: Int = 100
+    var booksPage: Double = 1.0
+    var totalPages: Double = 100.0
     var listBooksResponse: ListBooks? = null
 
 
@@ -34,8 +36,7 @@ class BookListViewModel(
             _listBooks.postValue(Resource.Loading())
             getBookListUseCase(
                 params = GetBookListUseCase.Params(
-                    page = booksPage,
-                    titleSearch = ""
+                    page = booksPage
                 ),
                 onSuccess = { responseBooks ->
                     booksPage++
@@ -61,4 +62,20 @@ class BookListViewModel(
         }
     }
 
+    fun searchBooks(titleSearch: String) {
+        viewModelScope.launch {
+            _listBooks.postValue(Resource.Loading())
+            searchBookListUseCase(
+                params = SearchBookListUseCase.Params(
+                    titleSearch = titleSearch
+                ),
+                onSuccess = {
+                    _listBooks.postValue(Resource.Success(it))
+                },
+                onError = {
+                    _listBooks.postValue(it.message?.let { it1 -> Resource.Error(it1) })
+                }
+            )
+        }
+    }
 }

@@ -14,19 +14,14 @@ class BooksRepositoryImpl(
     private val booksLocalDataSource: BooksLocalDataSource
 ) : BooksRepository {
 
-    override fun getBooks(page: Int, amount: Int, titleSearch: String): Flow<ListBooks> = flow {
+    override fun getBooks(page: Double, amount: Int): Flow<ListBooks> = flow {
         booksLocalDataSource.getAccessToken().collect { accestoken ->
             if (accestoken.isNotEmpty()) {
-                booksRemoteDataSource.getBooks("Bearer $accestoken", page, amount, titleSearch)
+                booksRemoteDataSource.getBooks("Bearer $accestoken", page, amount)
                     .collect { bookList ->
                         emit(bookList)
                     }
             }
-//            } else {
-//                booksLocalDataSource.getBooks().collect { bookList ->
-//                    emit(bookList)
-//                }
-//            }
         }
 
     }
@@ -34,5 +29,16 @@ class BooksRepositoryImpl(
     override fun saveBooks(bookList: List<Book>) = booksLocalDataSource.saveBooks(
         bookList = bookList
     )
+
+    override fun searchBooks(titleSearch: String?): Flow<ListBooks> = flow {
+        booksLocalDataSource.getAccessToken().collect { accestoken ->
+            if (accestoken.isNotEmpty()) {
+                booksRemoteDataSource.searchBooks("Bearer $accestoken", titleSearch)
+                    .collect { bookList ->
+                        emit(bookList)
+                    }
+            }
+        }
+    }
 
 }

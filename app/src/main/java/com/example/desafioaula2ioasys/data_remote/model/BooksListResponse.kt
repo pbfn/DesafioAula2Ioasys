@@ -11,6 +11,6 @@ data class BooksListResponse(
     @SerializedName("totalItems")
     val totalItems: Int,
     @SerializedName("totalPages")
-    val totalPages: Int
+    val totalPages: Double
 )
 

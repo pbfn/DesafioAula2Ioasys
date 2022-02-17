@@ -48,10 +48,16 @@ class BookListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeData()
+        configureListeners()
         setupRecyclerView()
         initBooks()
     }
 
+    private fun configureListeners() {
+        binding.searchView2.textChangeListener = { input ->
+        bookListViewModel.searchBooks(input)
+        }
+    }
 
     private fun observeData() {
         bookListViewModel.listBooks.observe(viewLifecycleOwner, { response ->
@@ -75,6 +81,8 @@ class BookListFragment : Fragment() {
                 }
             }
         })
+
+
     }
 
     private fun initBooks() {

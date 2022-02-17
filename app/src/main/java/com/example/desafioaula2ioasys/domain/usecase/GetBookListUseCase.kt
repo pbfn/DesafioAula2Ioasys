@@ -16,21 +16,18 @@ class GetBookListUseCase(
         return if (params != null) {
             booksRepository.getBooks(
                 page = params.page,
-                amount = 20,
-                titleSearch = params.titleSearch
+                amount = 20
             )
         } else {
             booksRepository.getBooks(
-                page = 10,
-                amount = 20,
-                titleSearch = ""
+                page = 10.0,
+                amount = 20
             )
         }
     }
 
     data class Params(
-        val page: Int,
-        val titleSearch: String
+        val page: Double
     )
 
 
