@@ -56,7 +56,7 @@ class BookListViewModel(
                     _listBooks.postValue(Resource.Success(listBooksResponse ?: responseBooks))
                 },
                 onError = {
-                    _listBooks.postValue(it.message?.let { it1 -> Resource.Error(it1) })
+                    _listBooks.postValue(Resource.Error(it.message))
                 }
             )
         }

@@ -7,6 +7,7 @@ import com.example.desafioaula2ioasys.domain.repositories.LoginRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 class LoginRepositoryImpl(
     private val loginRemoteDataSource: LoginRemoteDataSource,

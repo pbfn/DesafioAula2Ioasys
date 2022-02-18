@@ -1,6 +1,7 @@
 package com.example.desafioaula2ioasys.domain.exceptions
 
-open class LoginException : Exception()
+open class LoginException(message:String) : Exception()
 
-class InvalidEmailException : LoginException()
-class InvalidPassowordException : LoginException()
+class InvalidEmailException(message: String) : LoginException(message)
+class InvalidPassowordException(message: String) : LoginException(message)
+class InvalidLoginException (message: String):LoginException(message)

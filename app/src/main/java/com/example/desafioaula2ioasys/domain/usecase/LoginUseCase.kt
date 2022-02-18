@@ -14,8 +14,8 @@ class LoginUseCase(
 ) : UseCase<LoginUseCase.Params, User>(scope = scope) {
 
     override fun run(params: Params?): Flow<User> = when {
-        params?.email?.isEmpty() == true -> throw InvalidEmailException()
-        params?.password?.isEmpty() == true -> throw InvalidPassowordException()
+        params?.email?.isEmpty() == true -> throw InvalidEmailException("Email vazio")
+        params?.password?.isEmpty() == true -> throw InvalidPassowordException("Senha Vazia")
         else -> loginRepository.doLogin(
             email = params?.email ?:"",
             password = params?.password?:""
