@@ -68,7 +68,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Informações" />
+                android:text="@string/informacoes" />
 
             <LinearLayout
                 android:id="@+id/ll_pages"
@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Páginas"
+                    android:text="@string/paginas"
                     android:textAlignment="viewStart" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -90,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="300 paginas"
+                    android:text="@string/qtd_paginas"
                     android:textAlignment="viewEnd" />
             </LinearLayout>
 
@@ -105,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Editora "
+                    android:text="@string/editora"
                     android:textAlignment="viewStart" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="300 paginas"
+                    android:text="@string/qtd_paginas"
                     android:textAlignment="viewEnd" />
             </LinearLayout>
 
@@ -129,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Publicação"
+                    android:text="@string/publicacao"
                     android:textAlignment="viewStart" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -138,7 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="300 paginas"
+                    android:text="@string/qtd_paginas"
                     android:textAlignment="viewEnd" />
             </LinearLayout>
 
@@ -153,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Idioma"
+                    android:text="@string/idioma"
                     android:textAlignment="viewStart" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -162,7 +162,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="300 paginas"
+                    android:text="@string/qtd_paginas"
                     android:textAlignment="viewEnd" />
             </LinearLayout>
 
@@ -177,7 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Título Original"
+                    android:text="@string/titulo_original"
                     android:textAlignment="viewStart" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -186,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="300 paginas"
+                    android:text="@string/qtd_paginas"
                     android:textAlignment="viewEnd" />
             </LinearLayout>
 
@@ -201,7 +201,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ISBN-10"
+                    android:text="@string/isbn_10"
                     android:textAlignment="viewStart" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -210,7 +210,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="300 paginas"
+                    android:text="@string/qtd_paginas"
                     android:textAlignment="viewEnd" />
             </LinearLayout>
 
@@ -225,7 +225,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ISBN-10"
+                    android:text="@string/isbn_13"
                     android:textAlignment="viewStart" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -234,7 +234,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="300 paginas"
+                    android:text="@string/qtd_paginas"
                     android:textAlignment="viewEnd" />
             </LinearLayout>
 
@@ -246,7 +246,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:text="RESENHA DA EDITORA"
+            android:text="@string/resenha_da_editora"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
 

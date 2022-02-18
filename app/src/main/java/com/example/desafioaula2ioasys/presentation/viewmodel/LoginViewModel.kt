@@ -22,9 +22,6 @@ class LoginViewModel(
     private var _responseLogin = MutableLiveData<Resource<String>>()
     var responseLogin: LiveData<Resource<String>> = _responseLogin
 
-//    init {
-//        doLogin("desafio@ioasys.com.br", "12341234")
-//    }
 
     fun doLogin(email: String, password: String) {
         loginUseCase(
@@ -37,15 +34,15 @@ class LoginViewModel(
             },
             onError = { error ->
                 var message = ""
-                when(error){
-                    is InvalidEmailException ->{
+                when (error) {
+                    is InvalidEmailException -> {
                         message = "Email Invalido"
                     }
-                    is InvalidPassowordException ->{
+                    is InvalidPassowordException -> {
                         message = "Senha Invalida"
                     }
-                    is InvalidLoginException ->{
-                        message = "Houve um problema ao logar"
+                    is InvalidLoginException -> {
+                        message = "Login ou Senha invalidos"
                     }
                 }
 
